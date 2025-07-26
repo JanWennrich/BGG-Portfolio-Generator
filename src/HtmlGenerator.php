@@ -5,7 +5,7 @@ namespace JanWennrich\BoardGames;
 use Ramsey\Collection\Sort;
 use Twig\Environment;
 
-final readonly class HtmlGenerator
+final readonly class HtmlGenerator implements HtmlGeneratorInterface
 {
     public function __construct(
         private Environment $twig,
