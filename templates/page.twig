@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Jan's Boardgames 🎲</title>
+
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<h1>Jan's Boardgames 🎲</h1>
+<p>
+    <i>Extracted from <a href="https://boardgamegeek.com/user/{{ bggUsername }}" target="_blank">my BoardGameGeek profile</a>.</i>
+</p>
+<div class="tabs">
+    <div class="tab-switches">
+        <label class="tab-switch">
+            <input type="radio" name="tab-switch" aria-controls="tab-panel-history" checked="">
+            <span id="tab-switch-history" class="tab-switch-title" role="tab" >🗓️ Play History</span>
+        </label>
+        <label class="tab-switch">
+            <input type="radio" name="tab-switch" aria-controls="tab-panel-wishlist">
+            <span id="tab-switch-wishlist" class="tab-switch-title" role="tab">📋 Wishlist</span>
+        </label>
+        <label class="tab-switch">
+            <input type="radio" name="tab-switch" aria-controls="tab-panel-collection">
+            <span id="tab-switch-collection" class="tab-switch-title" role="tab">📚 Collection</span>
+        </label>
+    </div>
+    <div class="tab-panels">
+        <section id="tab-panel-history" class="tab-panel" aria-labelledby="tab-panel-history" data-tab-slug="history">
+            {{ include('boardgame-listing.twig', {'boardgameGroups': playsGroupedByDate}) }}
+        </section>
+        <section id="tab-panel-wishlist" class="tab-panel" aria-labelledby="tab-panel-wishlist" data-tab-slug="wishlist">
+            {{ include('boardgame-listing.twig', {'boardgameGroups': wishlistedBoardgamesGroupedByTextualWantLevel}) }}
+        </section>
+        <section id="tab-panel-collection" class="tab-panel" aria-labelledby="tab-panel-collection" data-tab-slug="collection">
+            {{ include('boardgame-listing.twig', {'boardgameGroups': ownedBoardgamesGroupedByFirstLetter}) }}
+        </section>
+    </div>
+</div>
+<hr>
+<footer>
+    <div class="portfolio">
+        <a href="https://janwennrich.github.io/" target="_blank">
+            <div class="button" role="button">
+                <img src="images/portfolio-logo.webp" alt="Portfolio Logo"/>
+                <span>My Portfolio</span>
+            </div>
+        </a>
+    </div>
+    <div class="github">
+        <a href="https://github.com/JanWennrich/boardgames" target="_blank">
+            <div class="button" role="button">
+                <img src="images/github-logo.svg" alt="GitHub Logo"/>
+                <span>Project's GitHub</span>
+            </div>
+        </a>
+    </div>
+    <div class="bgg">
+        <a href="https://boardgamegeek.com/" target="_blank">
+            <div class="button" role="button">
+                <img src="images/powered_by_bgg-logo.webp" alt="Powered by BoardGameGeek Logo"/>
+                <span>Data provided by BoardGameGeek</span>
+            </div>
+        </a>
+    </div>
+</footer>
+</body>
+<script src="script.js"></script>
+</html>

@@ -1,0 +1,9 @@
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+    level: 8
+    paths:
+        - src
+        - generate-html.php
+    tipsOfTheDay: false

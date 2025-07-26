@@ -1,0 +1,187 @@
+:root {
+    --font-size: 16px;
+    --color-background: #6b544f;
+    --color-headline: #fffffe;
+    --color-paragraph: #fff3ec;
+}
+
+@font-face {
+    font-family: Oswald;
+    src: url('fonts/Oswald-VariableFont_wght.ttf');
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-paragraph);
+    font-family: "Oswald", sans-serif;
+    font-size: var(--font-size);
+    line-height: 1.5;
+    padding: 1em;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-headline);
+}
+
+a {
+    color: var(--color-headline);
+}
+
+.tabs {
+    .tab-switches {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        border-radius: 8px;
+        background-color: #EEE;
+        box-sizing: border-box;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+        padding: 0.25rem;
+        margin-bottom: 30px;
+
+        .tab-switch {
+            flex: 1 1 auto;
+            text-align: center;
+
+            input {
+                display: none;
+            }
+
+            .tab-switch-title {
+                display: flex;
+                cursor: pointer;
+                align-items: center;
+                justify-content: center;
+                border-radius: 8px;
+                border: none;
+                padding: 0.5rem;
+                color: rgba(51, 65, 85, 1);
+                transition: all .15s ease-in-out;
+            }
+
+            input:checked + .tab-switch-title {
+                background-color: #fff;
+                font-weight: 600;
+            }
+        }
+    }
+    .tab-panels {
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel:first-of-type {
+            display: block;
+        }
+    }
+}
+
+.boardgame-listing {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 30px;
+    justify-items: center;
+    margin-bottom: 60px;
+}
+
+.boardgame-listing:last-of-type {
+    margin-bottom: 0;
+}
+
+.boardgame-listing-section {
+    padding-bottom: 25px;
+}
+
+.boardgame-listing-section.highlighted {
+    background-color: rgba(0,0,0,0.25);
+    border: 1px solid gray;
+}
+
+.boardgame-listing-section-link {
+    cursor: pointer;
+}
+
+.boardgame {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transition: transform 0.2s ease-in-out;
+}
+
+.boardgame:hover {
+    transform: scale(1.05);
+}
+
+.boardgame-image {
+    object-fit: contain;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+hr {
+    border: 2px solid #51423b;
+    border-radius: 8px;
+    margin: 1em 0;
+}
+
+footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1em;
+    grid-auto-flow: row;
+    align-items: stretch;
+    grid-template-areas:
+    "portfolio github"
+    "bgg bgg";
+
+    .portfolio {
+        grid-area: portfolio;
+
+        img {
+            border-radius: 8px;
+        }
+    }
+
+    .github {
+        grid-area: github;
+    }
+
+    .bgg {
+        grid-area: bgg;
+    }
+
+    .button {
+        position: relative;
+        display: flex;
+        column-gap: 1em;
+        flex-wrap: wrap;
+        border-radius: 8px;
+        background-color: #EEE;
+        box-sizing: border-box;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        padding: 0.5rem;
+        color: rgba(51, 65, 85, 1);
+        transition: transform 0.2s ease-in-out;
+        flex-direction: row;
+
+        img {
+            height: 35px;
+        }
+    }
+
+    .button:hover {
+        transform: scale(1.02);
+        background-color: #fff;
+    }
+}
