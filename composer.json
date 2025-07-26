@@ -1,6 +1,6 @@
 {
   "name": "jan-wennrich/bgg-portfolio-generator",
-  "description": "Generates static portfolio websites from BoardGameGeek accounts\n",
+  "description": "Generates static portfolio websites from BoardGameGeek accounts",
   "type": "project",
   "require": {
     "php": "~8.3",
