@@ -27,9 +27,10 @@ final class GeneratorCommand extends Command
 
     public function __invoke(
         SymfonyStyle $io,
-        #[Argument] string $bggUsername,
-        #[Argument] string $buildDirectory = __DIR__ . '/../../public',
+        #[Argument] string $bggUsername
     ): int {
+        $buildDirectory = __DIR__ . '/../../public';
+
         if (!is_dir($buildDirectory) && !@mkdir($buildDirectory)) {
             $io->error(sprintf('Build directory "%s" could not be created', $buildDirectory));
 
