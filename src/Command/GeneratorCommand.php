@@ -30,6 +30,12 @@ final class GeneratorCommand extends Command
         #[Argument] string $bggUsername,
         #[Argument] string $buildDirectory = __DIR__ . '/../../public',
     ): int {
+        if (!is_dir($buildDirectory) && !@mkdir($buildDirectory)) {
+            $io->error(sprintf('Build directory "%s" could not be created', $buildDirectory));
+
+            return Command::FAILURE;
+        }
+
         $wishlistedBoardgames = $this->wishlistedBoardgamesLoader->getForUser($bggUsername);
         $playedBoardgames = $this->playedBoardgamesLoader->getForUser($bggUsername);
         $ownedBoardgames = $this->ownedBoardgamesLoader->getForUser($bggUsername);
@@ -40,10 +46,6 @@ final class GeneratorCommand extends Command
             $wishlistedBoardgames,
             $bggUsername,
         );
-
-        if (!is_dir($buildDirectory)) {
-            mkdir($buildDirectory);
-        }
 
         file_put_contents("$buildDirectory/index.html", $html);
 
