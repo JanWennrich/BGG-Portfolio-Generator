@@ -2,8 +2,12 @@
   "name": "jan-wennrich/bgg-portfolio-generator",
   "description": "Generates static portfolio websites from BoardGameGeek accounts",
   "type": "project",
+  "bin": [
+    "bin/bgg-portfolio-generator.php"
+  ],
   "require": {
     "php": "~8.3",
+    "composer-runtime-api": "^2.2",
     "nataniel/bggxmlapi2": "^1.1.5",
     "php-di/php-di": "^7.0.7",
     "ramsey/collection": "^2.0",
