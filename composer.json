@@ -37,6 +37,9 @@
     "test": [
       "vendor/bin/phpstan",
       "vendor/bin/phpcs"
+    ],
+    "generate": [
+      "@php bin/bgg-portfolio-generator.php"
     ]
   }
 }
