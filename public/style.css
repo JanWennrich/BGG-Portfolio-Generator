@@ -138,16 +138,7 @@ footer {
     grid-auto-flow: row;
     align-items: stretch;
     grid-template-areas:
-    "portfolio github"
-    "bgg bgg";
-
-    .portfolio {
-        grid-area: portfolio;
-
-        img {
-            border-radius: 8px;
-        }
-    }
+    "github bgg";
 
     .github {
         grid-area: github;
