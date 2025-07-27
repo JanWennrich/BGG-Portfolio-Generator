@@ -22,7 +22,7 @@ jobs:
           php-version: "8.3"
 
       - name: "Validate Composer"
-        run: "composer validate"
+        run: "composer validate --check-lock --strict"
 
       - name: "Install dependencies"
         run: "composer install --no-interaction --no-progress"
