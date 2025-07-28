@@ -65,7 +65,7 @@ final class GeneratorCommand extends Command
         $io->info("Generated HTML from queried data");
 
         file_put_contents("$buildDirectory/index.html", $html);
-        $io->success("Portfolio successfully created in '$buildDirectory'");
+        $io->success(sprintf("Portfolio successfully created in '%s'", realpath($buildDirectory)));
 
         return Command::SUCCESS;
     }
