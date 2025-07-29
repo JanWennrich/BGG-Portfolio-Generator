@@ -43,9 +43,8 @@ To keep your portfolio up to date, consider automating this command (e.g. via a 
 
 To publish your portfolio, deploy the contents of the `public/` directory to any static web host.
 
-For continuous deployment, you can set up a CI/CD pipeline using GitHub Actions or other automation tools.
+You can utilize the [BGG Portfolio Generator Action](https://github.com/marketplace/actions/bgg-portfolio-generator) to deploy your portfolio to GitHub Pages for free. Refer to its usage example to get started.
 
-🛠️ *More deployment documentation coming soon.*
 
 ## 🤝 Contributing
 
