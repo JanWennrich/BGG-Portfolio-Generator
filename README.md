@@ -2,6 +2,8 @@
 
 A static site generator that fetches a BoardGameGeek (BGG) user's data and compiles it into a human-readable, self-contained HTML portfolio. Perfect for showcasing your board game collection online or archiving it offline.
 
+![Preview Screenshot](/README-preview.webp)
+
 ## ✨ Features
 
 * Presents key information from your BGG profile, organized in interactive tabs:
