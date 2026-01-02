@@ -2,7 +2,7 @@
 
 namespace JanWennrich\BoardGames;
 
-use Nataniel\BoardGameGeek\CollectionItem;
+use JanWennrich\BoardGameGeekApi\Collection\Item;
 
 class WishlistedBoardgamesLoader implements WishlistedBoardgamesLoaderInterface
 {
@@ -19,16 +19,16 @@ class WishlistedBoardgamesLoader implements WishlistedBoardgamesLoaderInterface
         ]);
 
         $wishlistedBoardgames = array_map(
-            fn(CollectionItem $collectionItem) => new WishlistEntry(
+            fn(Item $collectionItem) => new WishlistEntry(
                 boardgame: new Boardgame(
                     $collectionItem->getName(),
-                    $collectionItem->getThumbnail(),
                     (int)$collectionItem->getObjectId(),
+                    $collectionItem->getThumbnail(),
                 ),
-                wantLevel: (int)$collectionItem->getStatus()->attributes()->wishlistpriority,
-                lastModified: new \DateTimeImmutable($collectionItem->getStatus()->attributes()->lastmodified)
+                wantLevel: (int)$collectionItem->getStatus()->getWishlistPriority(),
+                lastModified: $collectionItem->getStatus()->getLastModified() ?? new \DateTimeImmutable()
             ),
-            $wishlistedBoardgames,
+            $wishlistedBoardgames->getIterator()->getArrayCopy(),
         );
 
         return new WishlistEntryCollection($wishlistedBoardgames);

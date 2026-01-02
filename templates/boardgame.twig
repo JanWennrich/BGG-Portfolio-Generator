@@ -1,10 +1,18 @@
 <article class="boardgame">
-    <a href="{{ boardgame.getBggUrl() }}" target="_blank">
-        <img class="boardgame-image"
-             src="{{ boardgame.thumbnailUrl }}"
-             alt="{{ boardgame.title }}"
-             title="{{ boardgame.title }}"
-             loading="lazy"
-        />
-    </a>
+    {% if boardgame.thumbnailUrl %}
+        <a href="{{ boardgame.getBggUrl() }}" target="_blank">
+            <img class="boardgame-image"
+                 src="{{ boardgame.thumbnailUrl }}"
+                 alt="{{ boardgame.title }}"
+                 title="{{ boardgame.title }}"
+                 loading="lazy"
+            />
+        </a>
+    {% else %}
+        <div class="boardgame-image-placeholder">
+            <a href="{{ boardgame.getBggUrl() }}" target="_blank">
+                <span>{{ boardgame.title }}</span>
+            </a>
+        </div>
+    {% endif %}
 </article>

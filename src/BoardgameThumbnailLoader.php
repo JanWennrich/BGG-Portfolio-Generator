@@ -2,7 +2,7 @@
 
 namespace JanWennrich\BoardGames;
 
-use Nataniel\BoardGameGeek\Exception;
+use JanWennrich\BoardGameGeekApi\Exception;
 
 class BoardgameThumbnailLoader
 {
@@ -15,7 +15,8 @@ class BoardgameThumbnailLoader
      * Fetches the thumbnails for the given board game IDs from the BGG API.
      *
      * @param int[] $bggGameIds The IDs of the board games to fetch thumbnails for
-     * @return string[] A mapping of game ID to thumbnail URL
+     *
+     * @return Array<int, string> A mapping of game ID to thumbnail URL
      *
      * @throws Exception
      */

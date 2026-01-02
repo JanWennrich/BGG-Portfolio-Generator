@@ -2,6 +2,8 @@
 
 namespace JanWennrich\BoardGames;
 
+use JanWennrich\BoardGameGeekApi\Exception;
+
 class PlayedBoardgamesLoader implements PlayedBoardgamesLoaderInterface
 {
     public function __construct(
@@ -11,7 +13,7 @@ class PlayedBoardgamesLoader implements PlayedBoardgamesLoaderInterface
     }
 
     /**
-     * @throws \Nataniel\BoardGameGeek\Exception|\DateMalformedStringException
+     * @throws Exception|\DateMalformedStringException
      */
     public function getForUser(string $bggUsername): PlayCollection
     {
@@ -22,13 +24,34 @@ class PlayedBoardgamesLoader implements PlayedBoardgamesLoaderInterface
         $playedGamesThumbnails = $this->thumbnailLoader->getForBggGameIds($bggPlayedGamesIds);
 
         $plays = array_map(
-            function (\Nataniel\BoardGameGeek\Play $bggPlay) use ($playedGamesThumbnails) {
+            static function (\JanWennrich\BoardGameGeekApi\Play $bggPlay) use ($playedGamesThumbnails) {
                 return new Play(
-                    new Boardgame($bggPlay->getObjectName(), $playedGamesThumbnails[$bggPlay->getObjectId()], $bggPlay->getObjectId()),
+                    new Boardgame(
+                        $bggPlay->getObjectName(),
+                        $bggPlay->getObjectId(),
+                        $playedGamesThumbnails[$bggPlay->getObjectId()]
+                    ),
                     new \DateTimeImmutable($bggPlay->getDate()),
                 );
             },
             $bggPlays,
+        );
+
+        return new PlayCollection($plays);
+    }
+
+    public function getForUserWithoutApiToken(string $bggUsername): PlayCollection
+    {
+        $plays = array_map(
+            static fn(\JanWennrich\BoardGameGeekApi\Play $bggPlay) => new Play(
+                new Boardgame(
+                    $bggPlay->getObjectName(),
+                    $bggPlay->getObjectId(),
+                    null
+                ),
+                new \DateTimeImmutable($bggPlay->getDate()),
+            ),
+            $this->bggApiClient->getPlays(['username' => $bggUsername]),
         );
 
         return new PlayCollection($plays);

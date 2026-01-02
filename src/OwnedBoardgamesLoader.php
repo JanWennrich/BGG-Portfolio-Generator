@@ -2,7 +2,7 @@
 
 namespace JanWennrich\BoardGames;
 
-use Nataniel\BoardGameGeek\CollectionItem;
+use JanWennrich\BoardGameGeekApi\Collection\Item;
 
 class OwnedBoardgamesLoader implements OwnedBoardgamesLoaderInterface
 {
@@ -19,12 +19,12 @@ class OwnedBoardgamesLoader implements OwnedBoardgamesLoaderInterface
         ]);
 
         $ownedBoardgames = array_map(
-            fn(CollectionItem $collectionItem) => new Boardgame(
+            fn(Item $collectionItem) => new Boardgame(
                 $collectionItem->getName(),
-                $collectionItem->getThumbnail(),
-                (int) $collectionItem->getObjectId()
+                (int)$collectionItem->getObjectId(),
+                $collectionItem->getThumbnail()
             ),
-            $ownedBoardgames,
+            $ownedBoardgames->getIterator()->getArrayCopy(),
         );
 
         return new BoardgameCollection($ownedBoardgames);

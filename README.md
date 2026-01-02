@@ -29,15 +29,38 @@ cd bgg-portfolio-generator/
 Generate your portfolio by running:
 
 ```bash
-composer generate [bgg_username]
+php bin/bgg-portfolio-generator.php generate [bgg_username] [--bgg-token/--bgg-password]
 ```
 
 Replace `[bgg_username]` with a BoardGameGeek username.
 
-The generated portfolio will be located in the `public/` directory.
+You have to authenticate via:
+- API token (recommended): `--bgg-token=<api-token>` (replace `<api-token>` with your API token)  
+- Password (workaround): `--bgg-password=<password>` (replace `<password>` with the password of the `bgg_username`)
+
+_(More information about authentication methods in the ["Authentication"-section](#-authentication) below)_
+
+Example command:
+
+```bash
+php bin/bgg-portfolio-generator.php generate Klabauterjan --bgg-token="123-foo-bar-456"
+```
+
+The generated portfolio will be located in the `public/` directory.  
 Open `public/index.html` in your browser to view it.
 
-To keep your portfolio up to date, consider automating this command (e.g. via a daily CRON job or GitHub Action). See [Deployment](#deployment) below.
+To keep your portfolio up to date, consider automating this command (e.g. via a daily CRON job or GitHub Action).  
+_(More information about automation in the ["Deployment"-section](#-deployment) below)_
+
+## 🔑 Authentication
+
+Recently the BoardGameGeek API requires authentication to access the data required to generate a portfolio.
+
+You can either authenticate via an [API token](https://boardgamegeek.com/using_the_xml_api) or your BoardGameGeek password as a workaround.
+
+The password workaround limits the functionality of the portfolio generator (e.g. loading thumbnails for plays does not work).  
+Thus using an API token is the recommended way.  
+Follow this link to obtain an API token: https://boardgamegeek.com/using_the_xml_api
 
 ## 📦 Deployment
 

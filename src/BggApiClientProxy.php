@@ -2,10 +2,9 @@
 
 namespace JanWennrich\BoardGames;
 
-use Exception;
-use Nataniel\BoardGameGeek\Client;
-use Nataniel\BoardGameGeek\CollectionItem;
-use Nataniel\BoardGameGeek\Thing;
+use JanWennrich\BoardGameGeekApi\Client;
+use JanWennrich\BoardGameGeekApi\Collection;
+use JanWennrich\BoardGameGeekApi\Thing;
 
 class BggApiClientProxy
 {
@@ -13,68 +12,43 @@ class BggApiClientProxy
     {
     }
 
-    /**
-     * @return mixed[]
-     */
-    private function retryUntilNonEmptyArrayIsReturned(
-        callable $callable,
-        int $maxRetries = 3,
-        int $sleepTimeInSeconds = 2,
-    ): array {
-        $retries = 0;
+    public function authenticateWithPassword(string $bggUsername, string $bggPassword): void
+    {
+        $this->bggApiClient->login($bggUsername, $bggPassword);
+    }
 
-        while ($retries < $maxRetries) {
-            if ($retries > 0) {
-                sleep($sleepTimeInSeconds);
-            }
-
-            try {
-                $result = $callable();
-            } catch (Exception) {
-                $result = [];
-            }
-
-            if (is_array($result) && $result !== []) {
-                return $result;
-            }
-
-            $retries++;
-        }
-
-        return [];
+    public function authenticateWithToken(string $bggToken): void
+    {
+        $this->bggApiClient->setAuthorization($bggToken);
     }
 
     /**
-     * Calls {@see Client::getThings()} and retries until the result is not an empty array.
-     *
      * @param int[] $ids
      * @param bool $stats
      * @return Thing[]
+     * @throws \JanWennrich\BoardGameGeekApi\Exception
      */
     public function getThings(array $ids, bool $stats = false): array
     {
-        return $this->retryUntilNonEmptyArrayIsReturned(fn() => $this->bggApiClient->getThings($ids, $stats));
+        return $this->bggApiClient->getThings($ids, $stats);
     }
 
     /**
-     * Calls {@see Client::getCollection()} and retries until the result is not an empty array.
-     *
      * @param mixed[] $params
-     * @return CollectionItem[]
+     * @throws \JanWennrich\BoardGameGeekApi\Exception
      */
-    public function getCollection(array $params): array
+    public function getCollection(array $params): Collection
     {
-        return $this->retryUntilNonEmptyArrayIsReturned(fn() => $this->bggApiClient->getCollection($params));
+        return $this->bggApiClient->getCollection($params);
     }
 
     /**
-     * Calls {@see Client::getPlays()} and retries until the result is not an empty array.
-     *
      * @param mixed[] $params
-     * @return \Nataniel\BoardGameGeek\Play[]
+     * @return \JanWennrich\BoardGameGeekApi\Play[]
+     * @throws \JanWennrich\BoardGameGeekApi\Exception
      */
     public function getPlays(array $params): array
     {
-        return $this->retryUntilNonEmptyArrayIsReturned(fn() => $this->bggApiClient->getPlays($params));
+        return $this->bggApiClient->getPlays($params);
     }
 }

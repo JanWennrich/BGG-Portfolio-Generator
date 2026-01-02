@@ -6,8 +6,8 @@ class Boardgame
 {
     public function __construct(
         public string $title,
-        public string $thumbnailUrl,
-        public int $bggId
+        public int $bggId,
+        public ?string $thumbnailUrl = null
     ) {
     }
 

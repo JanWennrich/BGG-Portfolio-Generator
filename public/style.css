@@ -124,6 +124,21 @@ a {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.boardgame-image-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    background-color: #956868;
+
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 hr {
     border: 2px solid #51423b;
     border-radius: 8px;
