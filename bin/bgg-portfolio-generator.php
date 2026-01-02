@@ -28,7 +28,7 @@ $diContainer = new \DI\Container([
 ]);
 
 $generatorCommand = $diContainer->get(\JanWennrich\BoardGames\Command\GeneratorCommand::class);
-$application->add($generatorCommand);
+$application->addCommand($generatorCommand);
 $application->setDefaultCommand($generatorCommand->getName(), true);
 
 $application->run();
