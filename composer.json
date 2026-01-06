@@ -38,12 +38,12 @@
   },
   "scripts": {
     "test": [
-      "composer normalize --dry-run",
-      "composer validate --strict",
-      "vendor/bin/composer-dependency-analyser",
-      "vendor/bin/phpstan",
-      "vendor/bin/rector --dry-run",
-      "vendor/bin/php-cs-fixer check"
+      "@composer normalize --dry-run",
+      "@composer validate --strict",
+      "@php vendor/bin/composer-dependency-analyser",
+      "@php vendor/bin/phpstan",
+      "@php vendor/bin/rector --dry-run",
+      "@php vendor/bin/php-cs-fixer check"
     ]
   }
 }
