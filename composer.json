@@ -16,10 +16,10 @@
   "require-dev": {
     "captainhook/captainhook": "^5.24.1",
     "ergebnis/composer-normalize": "^2.48",
+    "friendsofphp/php-cs-fixer": "^3.92",
     "phpstan/phpstan": "^2.0.4",
     "rector/rector": "^2.3",
-    "shipmonk/composer-dependency-analyser": "^1.8",
-    "squizlabs/php_codesniffer": "^4"
+    "shipmonk/composer-dependency-analyser": "^1.8"
   },
   "minimum-stability": "stable",
   "autoload": {
@@ -43,7 +43,7 @@
       "vendor/bin/composer-dependency-analyser",
       "vendor/bin/phpstan",
       "vendor/bin/rector --dry-run",
-      "vendor/bin/phpcs"
+      "vendor/bin/php-cs-fixer check"
     ]
   }
 }
