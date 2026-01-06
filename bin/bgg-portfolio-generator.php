@@ -18,9 +18,9 @@ use Twig\Loader\FilesystemLoader;
 $application = new Application();
 
 $diContainer = new \DI\Container([
-    Environment::class => \DI\factory(function () {
-        return new Environment(new FilesystemLoader(__DIR__ . '/../templates'));
-    }),
+    Environment::class => \DI\factory(
+        fn(): Environment => new Environment(new FilesystemLoader(__DIR__ . '/../templates'))
+    ),
     HtmlGeneratorInterface::class => \DI\get(HtmlGenerator::class),
     PlayedBoardgamesLoaderInterface::class => \DI\get(PlayedBoardgamesLoader::class),
     OwnedBoardgamesLoaderInterface::class => \DI\get(OwnedBoardgamesLoader::class),

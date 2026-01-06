@@ -24,16 +24,14 @@ class PlayedBoardgamesLoader implements PlayedBoardgamesLoaderInterface
         $playedGamesThumbnails = $this->thumbnailLoader->getForBggGameIds($bggPlayedGamesIds);
 
         $plays = array_map(
-            static function (\JanWennrich\BoardGameGeekApi\Play $bggPlay) use ($playedGamesThumbnails) {
-                return new Play(
-                    new Boardgame(
-                        $bggPlay->getObjectName(),
-                        $bggPlay->getObjectId(),
-                        $playedGamesThumbnails[$bggPlay->getObjectId()]
-                    ),
-                    new \DateTimeImmutable($bggPlay->getDate()),
-                );
-            },
+            static fn(\JanWennrich\BoardGameGeekApi\Play $bggPlay) => new Play(
+                new Boardgame(
+                    $bggPlay->getObjectName(),
+                    $bggPlay->getObjectId(),
+                    $playedGamesThumbnails[$bggPlay->getObjectId()]
+                ),
+                new \DateTimeImmutable($bggPlay->getDate()),
+            ),
             $bggPlays,
         );
 
