@@ -7,7 +7,7 @@
     "php": "^8.3",
     "ext-mbstring": "*",
     "composer-runtime-api": "^2.2",
-    "jan-wennrich/bgg-api": "dev-master@dev",
+    "jan-wennrich/bgg-api": "^0.1.0",
     "php-di/php-di": "^7.1.1",
     "ramsey/collection": "^2.1.1",
     "symfony/console": "^7.4.3",

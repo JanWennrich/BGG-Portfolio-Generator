@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "599f523874117cb268d3d3c804c512ce",
+    "content-hash": "2065afed916a28add0bee716dff01473",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -333,7 +333,7 @@
         },
         {
             "name": "jan-wennrich/bgg-api",
-            "version": "dev-master",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JanWennrich/bgg-api.git",
@@ -361,7 +361,6 @@
                 "rector/rector": "^2.3",
                 "shipmonk/composer-dependency-analyser": "^1.8.4"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -384,7 +383,7 @@
             ],
             "description": "BoardGameGeek.com API Client Library",
             "support": {
-                "source": "https://github.com/JanWennrich/bgg-api/tree/master"
+                "source": "https://github.com/JanWennrich/bgg-api/tree/0.1.0"
             },
             "time": "2025-12-31T00:18:16+00:00"
         },
@@ -4770,9 +4769,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "jan-wennrich/bgg-api": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
