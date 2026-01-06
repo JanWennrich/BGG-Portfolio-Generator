@@ -38,6 +38,7 @@
   "scripts": {
     "test": [
       "composer normalize --dry-run",
+      "composer validate --strict",
       "vendor/bin/composer-dependency-analyser",
       "vendor/bin/phpstan",
       "vendor/bin/phpcs"
