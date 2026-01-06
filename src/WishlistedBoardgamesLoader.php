@@ -22,7 +22,7 @@ final readonly class WishlistedBoardgamesLoader implements WishlistedBoardgamesL
             fn(Item $collectionItem): WishlistEntry => new WishlistEntry(
                 boardgame: new Boardgame(
                     $collectionItem->getName(),
-                    (int)$collectionItem->getObjectId(),
+                    $collectionItem->getObjectId(),
                     $collectionItem->getThumbnail(),
                 ),
                 wantLevel: (int)$collectionItem->getStatus()->getWishlistPriority(),

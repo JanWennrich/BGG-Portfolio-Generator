@@ -21,7 +21,7 @@ final readonly class OwnedBoardgamesLoader implements OwnedBoardgamesLoaderInter
         $ownedBoardgames = array_map(
             fn(Item $collectionItem): Boardgame => new Boardgame(
                 $collectionItem->getName(),
-                (int)$collectionItem->getObjectId(),
+                $collectionItem->getObjectId(),
                 $collectionItem->getThumbnail()
             ),
             $ownedBoardgames->getIterator()->getArrayCopy(),
