@@ -19,12 +19,15 @@ class PlayedBoardgamesLoader implements PlayedBoardgamesLoaderInterface
     {
         $bggPlays = $this->bggApiClient->getPlays(['username' => $bggUsername]);
 
-        $bggPlayedGamesIds = array_map(fn($bggPlay) => $bggPlay->getObjectId(), $bggPlays);
+        $bggPlayedGamesIds = array_map(
+            fn(\JanWennrich\BoardGameGeekApi\Play $bggPlay): int => $bggPlay->getObjectId(),
+            $bggPlays,
+        );
 
         $playedGamesThumbnails = $this->thumbnailLoader->getForBggGameIds($bggPlayedGamesIds);
 
         $plays = array_map(
-            static fn(\JanWennrich\BoardGameGeekApi\Play $bggPlay) => new Play(
+            static fn(\JanWennrich\BoardGameGeekApi\Play $bggPlay): Play => new Play(
                 new Boardgame(
                     $bggPlay->getObjectName(),
                     $bggPlay->getObjectId(),
@@ -41,7 +44,7 @@ class PlayedBoardgamesLoader implements PlayedBoardgamesLoaderInterface
     public function getForUserWithoutApiToken(string $bggUsername): PlayCollection
     {
         $plays = array_map(
-            static fn(\JanWennrich\BoardGameGeekApi\Play $bggPlay) => new Play(
+            static fn(\JanWennrich\BoardGameGeekApi\Play $bggPlay): Play => new Play(
                 new Boardgame(
                     $bggPlay->getObjectName(),
                     $bggPlay->getObjectId()

@@ -19,7 +19,7 @@ class WishlistedBoardgamesLoader implements WishlistedBoardgamesLoaderInterface
         ]);
 
         $wishlistedBoardgames = array_map(
-            fn(Item $collectionItem) => new WishlistEntry(
+            fn(Item $collectionItem): WishlistEntry => new WishlistEntry(
                 boardgame: new Boardgame(
                     $collectionItem->getName(),
                     (int)$collectionItem->getObjectId(),

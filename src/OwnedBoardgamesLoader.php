@@ -19,7 +19,7 @@ class OwnedBoardgamesLoader implements OwnedBoardgamesLoaderInterface
         ]);
 
         $ownedBoardgames = array_map(
-            fn(Item $collectionItem) => new Boardgame(
+            fn(Item $collectionItem): Boardgame => new Boardgame(
                 $collectionItem->getName(),
                 (int)$collectionItem->getObjectId(),
                 $collectionItem->getThumbnail()
