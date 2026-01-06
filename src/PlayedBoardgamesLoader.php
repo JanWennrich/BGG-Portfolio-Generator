@@ -46,8 +46,7 @@ class PlayedBoardgamesLoader implements PlayedBoardgamesLoaderInterface
             static fn(\JanWennrich\BoardGameGeekApi\Play $bggPlay) => new Play(
                 new Boardgame(
                     $bggPlay->getObjectName(),
-                    $bggPlay->getObjectId(),
-                    null
+                    $bggPlay->getObjectId()
                 ),
                 new \DateTimeImmutable($bggPlay->getDate()),
             ),
