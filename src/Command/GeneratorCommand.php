@@ -36,12 +36,12 @@ final class GeneratorCommand extends Command
             description: 'Authenticate via BoardGameGeek API authorization token (see: https://boardgamegeek.com/using_the_xml_api)',
             name: 'bgg-token'
         )]
-        ?string $bggToken = null,
+        string $bggToken = "",
         #[Option(
             description: 'Authenticate via password of the given BoardGameGeek user (limits functionality, use token instead)',
             name: 'bgg-password'
         )]
-        ?string $bggPassword = null,
+        string $bggPassword = "",
     ): int {
         $io->title("BoardGameGeek Portfolio Generator");
 
@@ -63,12 +63,12 @@ final class GeneratorCommand extends Command
 
         $isAuthenticated = false;
 
-        if ($bggToken !== null) {
+        if ($bggToken !== "") {
             $this->bggApiClient->authenticateWithToken($bggToken);
             $isAuthenticated = true;
         }
 
-        if ($bggPassword !== null) {
+        if ($bggPassword !== "") {
             $this->bggApiClient->authenticateWithPassword($bggUsername, $bggPassword);
             $io->warning(
                 'Authenticating via password, functionality is limited. Authenticate via API token for all features. See README.md for more information.',
@@ -87,7 +87,7 @@ final class GeneratorCommand extends Command
         $wishlistedBoardgames = $this->wishlistedBoardgamesLoader->getForUser($bggUsername);
 
         $io->info('Querying played boardgames…');
-        if ($bggToken === null) {
+        if ($bggToken === "") {
             $io->warning('Plays are loaded without thumbnails due to restricted access via password authentication. Authenticate via API token to resolve this. See README.md for more information.');
             $playedBoardgames = $this->playedBoardgamesLoader->getForUserWithoutApiToken($bggUsername);
         } else {
