@@ -4,7 +4,7 @@ namespace JanWennrich\BoardGames;
 
 use JanWennrich\BoardGameGeekApi\Exception;
 
-class BoardgameThumbnailLoader
+final readonly class BoardgameThumbnailLoader
 {
     public function __construct(private BggApiClientProxy $bggApiClient)
     {

@@ -4,10 +4,10 @@ namespace JanWennrich\BoardGames;
 
 use JanWennrich\BoardGameGeekApi\Collection\Item;
 
-class OwnedBoardgamesLoader implements OwnedBoardgamesLoaderInterface
+final readonly class OwnedBoardgamesLoader implements OwnedBoardgamesLoaderInterface
 {
     public function __construct(
-        private readonly BggApiClientProxy $bggApiClient,
+        private BggApiClientProxy $bggApiClient,
     ) {
     }
 

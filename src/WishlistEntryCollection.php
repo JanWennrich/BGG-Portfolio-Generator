@@ -7,7 +7,7 @@ use Ramsey\Collection\AbstractCollection;
 /**
  * @extends AbstractCollection<WishlistEntry>
  */
-class WishlistEntryCollection extends AbstractCollection
+final class WishlistEntryCollection extends AbstractCollection
 {
     /**
      * @return class-string

@@ -7,7 +7,7 @@ use Ramsey\Collection\AbstractCollection;
 /**
  * @extends AbstractCollection<Boardgame>
  */
-class BoardgameCollection extends AbstractCollection
+final class BoardgameCollection extends AbstractCollection
 {
     /**
      * @return class-string

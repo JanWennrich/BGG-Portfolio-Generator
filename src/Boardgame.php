@@ -2,7 +2,7 @@
 
 namespace JanWennrich\BoardGames;
 
-class Boardgame
+final readonly class Boardgame
 {
     public function __construct(
         public string $title,

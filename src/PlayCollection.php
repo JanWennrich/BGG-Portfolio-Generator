@@ -7,7 +7,7 @@ use Ramsey\Collection\AbstractCollection;
 /**
  * @extends AbstractCollection<Play>
  */
-class PlayCollection extends AbstractCollection
+final class PlayCollection extends AbstractCollection
 {
     /**
      * @return class-string

@@ -6,7 +6,7 @@ use JanWennrich\BoardGameGeekApi\Client;
 use JanWennrich\BoardGameGeekApi\Collection;
 use JanWennrich\BoardGameGeekApi\Thing;
 
-class BggApiClientProxy
+final readonly class BggApiClientProxy
 {
     public function __construct(private Client $bggApiClient)
     {

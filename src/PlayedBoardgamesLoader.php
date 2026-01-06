@@ -4,11 +4,11 @@ namespace JanWennrich\BoardGames;
 
 use JanWennrich\BoardGameGeekApi\Exception;
 
-class PlayedBoardgamesLoader implements PlayedBoardgamesLoaderInterface
+final readonly class PlayedBoardgamesLoader implements PlayedBoardgamesLoaderInterface
 {
     public function __construct(
-        private readonly BggApiClientProxy $bggApiClient,
-        private readonly BoardgameThumbnailLoader $thumbnailLoader,
+        private BggApiClientProxy $bggApiClient,
+        private BoardgameThumbnailLoader $thumbnailLoader,
     ) {
     }
 
