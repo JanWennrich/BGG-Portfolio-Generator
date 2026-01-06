@@ -63,6 +63,12 @@ final class GeneratorCommand extends Command
 
         $isAuthenticated = false;
 
+        if ($bggToken !== '' && $bggPassword !== '') {
+            $io->error('The options "--bgg-token" and "--bgg-password" are mutually exclusive. You may only use one of them at a time.');
+
+            return Command::FAILURE;
+        }
+
         if ($bggToken !== "") {
             $this->bggApiClient->authenticateWithToken($bggToken);
             $isAuthenticated = true;
