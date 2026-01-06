@@ -24,7 +24,6 @@ final readonly class BggApiClientProxy
 
     /**
      * @param int[] $ids
-     * @param bool $stats
      * @return Thing[]
      * @throws \JanWennrich\BoardGameGeekApi\Exception
      */
