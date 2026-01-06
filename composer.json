@@ -16,17 +16,13 @@
     "captainhook/captainhook": "^5.24.1",
     "ergebnis/composer-normalize": "^2.48",
     "phpstan/phpstan": "^2.0.4",
+    "shipmonk/composer-dependency-analyser": "^1.8",
     "squizlabs/php_codesniffer": "^4"
   },
   "minimum-stability": "stable",
   "autoload": {
     "psr-4": {
       "JanWennrich\\BoardGames\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "JanWennrich\\BoardGames\\Test\\": "tests/"
     }
   },
   "bin": [
@@ -41,6 +37,7 @@
   "scripts": {
     "test": [
       "composer normalize --dry-run",
+      "vendor/bin/composer-dependency-analyser",
       "vendor/bin/phpstan",
       "vendor/bin/phpcs"
     ]
