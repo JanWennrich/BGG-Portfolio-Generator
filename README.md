@@ -31,7 +31,7 @@ cd bgg-portfolio-generator/
 Generate your portfolio by running:
 
 ```bash
-php bin/bgg-portfolio-generator.php generate [bgg_username] [--bgg-token/--bgg-password]
+php bin/bgg-portfolio-generator.php [--bgg-token/--bgg-password] [bgg_username]
 ```
 
 Replace `[bgg_username]` with a BoardGameGeek username.
