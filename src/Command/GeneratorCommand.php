@@ -88,6 +88,7 @@ final class GeneratorCommand extends Command
 
         $io->info('Querying played boardgames…');
         if ($bggToken === null) {
+            $io->warning('Plays are loaded without thumbnails due to restricted access via password authentication. Authenticate via API token to resolve this. See README.md for more information.');
             $playedBoardgames = $this->playedBoardgamesLoader->getForUserWithoutApiToken($bggUsername);
         } else {
             $playedBoardgames = $this->playedBoardgamesLoader->getForUser($bggUsername);
