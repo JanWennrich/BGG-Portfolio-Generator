@@ -43,6 +43,6 @@ return RectorConfig::configure()
             RenameForeachValueVariableToMatchExprVariableRector::class,
             RenamePropertyToMatchTypeRector::class,
             RenameParamToMatchTypeRector::class,
-            RenameVariableToMatchMethodCallReturnTypeRector::class
+            RenameVariableToMatchMethodCallReturnTypeRector::class,
         ],
     );

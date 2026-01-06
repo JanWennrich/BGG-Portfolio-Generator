@@ -9,8 +9,7 @@ final readonly class PlayedBoardgamesLoader implements PlayedBoardgamesLoaderInt
     public function __construct(
         private BggApiClientProxy $bggApiClient,
         private BoardgameThumbnailLoader $thumbnailLoader,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws Exception|\DateMalformedStringException

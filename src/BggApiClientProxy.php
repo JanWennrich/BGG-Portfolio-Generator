@@ -8,9 +8,7 @@ use JanWennrich\BoardGameGeekApi\Thing;
 
 final readonly class BggApiClientProxy
 {
-    public function __construct(private Client $bggApiClient)
-    {
-    }
+    public function __construct(private Client $bggApiClient) {}
 
     public function authenticateWithPassword(string $bggUsername, string $bggPassword): void
     {

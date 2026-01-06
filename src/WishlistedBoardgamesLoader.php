@@ -8,8 +8,7 @@ final readonly class WishlistedBoardgamesLoader implements WishlistedBoardgamesL
 {
     public function __construct(
         private BggApiClientProxy $bggApiClient,
-    ) {
-    }
+    ) {}
 
     public function getForUser(string $bggUsername): WishlistEntryCollection
     {
@@ -25,7 +24,7 @@ final readonly class WishlistedBoardgamesLoader implements WishlistedBoardgamesL
                     $collectionItem->getObjectId(),
                     $collectionItem->getThumbnail(),
                 ),
-                wantLevel: (int)$collectionItem->getStatus()->getWishlistPriority(),
+                wantLevel: (int) $collectionItem->getStatus()->getWishlistPriority(),
                 lastModified: $collectionItem->getStatus()->getLastModified() ?? new \DateTimeImmutable()
             ),
             $wishlistedBoardgames->getIterator()->getArrayCopy(),

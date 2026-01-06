@@ -8,8 +8,7 @@ final readonly class OwnedBoardgamesLoader implements OwnedBoardgamesLoaderInter
 {
     public function __construct(
         private BggApiClientProxy $bggApiClient,
-    ) {
-    }
+    ) {}
 
     public function getForUser(string $bggUsername): BoardgameCollection
     {

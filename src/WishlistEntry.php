@@ -8,6 +8,5 @@ final readonly class WishlistEntry
         public Boardgame $boardgame,
         public int $wantLevel,
         public \DateTimeImmutable $lastModified
-    ) {
-    }
+    ) {}
 }

@@ -8,8 +8,7 @@ final readonly class Boardgame
         public string $title,
         public int $bggId,
         public ?string $thumbnailUrl = null
-    ) {
-    }
+    ) {}
 
     public function getBggUrl(): string
     {

@@ -6,9 +6,7 @@ use JanWennrich\BoardGameGeekApi\Exception;
 
 final readonly class BoardgameThumbnailLoader
 {
-    public function __construct(private BggApiClientProxy $bggApiClient)
-    {
-    }
+    public function __construct(private BggApiClientProxy $bggApiClient) {}
 
 
     /**

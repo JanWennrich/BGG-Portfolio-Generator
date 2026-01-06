@@ -9,8 +9,7 @@ final readonly class HtmlGenerator implements HtmlGeneratorInterface
 {
     public function __construct(
         private Environment $twig,
-    ) {
-    }
+    ) {}
 
     public function generateHtml(
         BoardgameCollection $boardgamesOwned,
