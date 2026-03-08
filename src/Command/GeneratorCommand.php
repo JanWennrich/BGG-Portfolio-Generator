@@ -45,6 +45,12 @@ final class GeneratorCommand extends Command
     ): int {
         $io->title("BoardGameGeek Portfolio Generator");
 
+        if ($bggUsername === "") {
+            $io->error("Board GameGeek Portfolio Username cannot be empty");
+
+            return Command::FAILURE;
+        }
+
         $buildDirectory = __DIR__ . '/../../public';
 
         $io->info(
