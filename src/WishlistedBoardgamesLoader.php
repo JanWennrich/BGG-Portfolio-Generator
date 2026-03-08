@@ -2,32 +2,38 @@
 
 namespace JanWennrich\BoardGames;
 
-use JanWennrich\BoardGameGeekApi\Collection\Item;
+use JanWennrich\BoardGameGeekApi\Client;
+use JanWennrich\BoardGameGeekApi\Collection\CollectionItem;
+use JanWennrich\BoardGameGeekApi\Query\CollectionQuery;
 
 final readonly class WishlistedBoardgamesLoader implements WishlistedBoardgamesLoaderInterface
 {
     public function __construct(
-        private BggApiClientProxy $bggApiClient,
+        private Client $bggApiClient,
     ) {}
 
+    /**
+     * @param non-empty-string $bggUsername
+     * @throws \JanWennrich\BoardGameGeekApi\Exception
+     */
     public function getForUser(string $bggUsername): WishlistEntryCollection
     {
-        $wishlistedBoardgames = $this->bggApiClient->getCollection([
-            'username' => $bggUsername,
-            'wishlist' => 1,
-        ]);
+        $wishlistedBoardgames = $this->bggApiClient->getCollection(
+            $bggUsername,
+            new CollectionQuery(isWishlisted: true),
+        );
 
         $wishlistedBoardgames = array_map(
-            fn(Item $collectionItem): WishlistEntry => new WishlistEntry(
+            fn(CollectionItem $collectionItem): WishlistEntry => new WishlistEntry(
                 boardgame: new Boardgame(
                     $collectionItem->getName(),
                     $collectionItem->getObjectId(),
                     $collectionItem->getThumbnail(),
                 ),
                 wantLevel: (int) $collectionItem->getStatus()->getWishlistPriority(),
-                lastModified: $collectionItem->getStatus()->getLastModified() ?? new \DateTimeImmutable()
+                lastModified: $collectionItem->getStatus()->getLastModified()
             ),
-            $wishlistedBoardgames->getIterator()->getArrayCopy(),
+            $wishlistedBoardgames->getItems(),
         );
 
         return new WishlistEntryCollection($wishlistedBoardgames);

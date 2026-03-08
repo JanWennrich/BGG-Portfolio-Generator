@@ -3,6 +3,9 @@
 
 require_once $_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php';
 
+use GuzzleHttp\Cookie\CookieJar;
+use GuzzleHttp\Psr7\HttpFactory;
+use JanWennrich\BoardGameGeekApi\Client;
 use JanWennrich\BoardGames\HtmlGenerator;
 use JanWennrich\BoardGames\HtmlGeneratorInterface;
 use JanWennrich\BoardGames\OwnedBoardgamesLoader;
@@ -25,6 +28,12 @@ $diContainer = new \DI\Container([
     PlayedBoardgamesLoaderInterface::class => \DI\get(PlayedBoardgamesLoader::class),
     OwnedBoardgamesLoaderInterface::class => \DI\get(OwnedBoardgamesLoader::class),
     WishlistedBoardgamesLoaderInterface::class => \DI\get(WishlistedBoardgamesLoader::class),
+    \GuzzleHttp\Client::class => static function (CookieJar $cookieJar): \GuzzleHttp\Client {
+        return new \GuzzleHttp\Client(['cookies' => $cookieJar]);
+    },
+    Client::class => static function (\GuzzleHttp\Client $guzzleClient, HttpFactory $httpFactory): Client {
+        return new Client($guzzleClient, $httpFactory, $httpFactory);
+    },
 ]);
 
 $generatorCommand = $diContainer->get(\JanWennrich\BoardGames\Command\GeneratorCommand::class);

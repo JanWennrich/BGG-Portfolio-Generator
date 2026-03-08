@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JanWennrich\BoardGames\Command;
 
-use JanWennrich\BoardGames\BggApiClientProxy;
+use JanWennrich\BoardGameGeekApi\Client;
 use JanWennrich\BoardGames\HtmlGeneratorInterface;
 use JanWennrich\BoardGames\OwnedBoardgamesLoaderInterface;
 use JanWennrich\BoardGames\PlayedBoardgamesLoaderInterface;
@@ -23,7 +23,7 @@ final class GeneratorCommand extends Command
         private readonly PlayedBoardgamesLoaderInterface $playedBoardgamesLoader,
         private readonly OwnedBoardgamesLoaderInterface $ownedBoardgamesLoader,
         private readonly HtmlGeneratorInterface $htmlGenerator,
-        private readonly BggApiClientProxy $bggApiClient
+        private readonly Client $bggApiClient
     ) {
         parent::__construct();
     }
@@ -70,12 +70,12 @@ final class GeneratorCommand extends Command
         }
 
         if ($bggToken !== "") {
-            $this->bggApiClient->authenticateWithToken($bggToken);
+            $this->bggApiClient->setApiToken($bggToken);
             $isAuthenticated = true;
         }
 
         if ($bggPassword !== "") {
-            $this->bggApiClient->authenticateWithPassword($bggUsername, $bggPassword);
+            $this->bggApiClient->login($bggUsername, $bggPassword);
             $io->warning(
                 'Authenticating via password, functionality is limited. Authenticate via API token for all features. See README.md for more information.',
             );

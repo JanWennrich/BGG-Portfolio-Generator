@@ -2,11 +2,12 @@
 
 namespace JanWennrich\BoardGames;
 
+use JanWennrich\BoardGameGeekApi\Client;
 use JanWennrich\BoardGameGeekApi\Exception;
 
 final readonly class BoardgameThumbnailLoader
 {
-    public function __construct(private BggApiClientProxy $bggApiClient) {}
+    public function __construct(private Client $bggApiClient) {}
 
 
     /**
@@ -14,13 +15,16 @@ final readonly class BoardgameThumbnailLoader
      *
      * @param int[] $bggGameIds The IDs of the board games to fetch thumbnails for
      *
-     * @return Array<int, string> A mapping of game ID to thumbnail URL
+     * @return Array<int, ?string> A mapping of game ID to thumbnail URL
      *
      * @throws Exception
      */
     public function getForBggGameIds(array $bggGameIds): array
     {
-        $bggGameIds = array_unique($bggGameIds);
+        $bggGameIds = array_filter(
+            array_unique($bggGameIds),
+            static fn(int $id): bool => $id > 0,
+        );
 
         $bggThings = [];
 
