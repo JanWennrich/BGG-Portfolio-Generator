@@ -40,6 +40,6 @@ $diContainer = new \DI\Container([
 /** @var GeneratorCommand $generatorCommand */
 $generatorCommand = $diContainer->get(GeneratorCommand::class);
 $application->addCommand($generatorCommand);
-$application->setDefaultCommand($generatorCommand->getName(), true);
+$application->setDefaultCommand($generatorCommand->getName() ?? 'generate', true);
 
 $application->run();
