@@ -3,3 +3,4 @@
 /build/
 /public/index.html
 /.php-cs-fixer.cache
+/composer.phar
