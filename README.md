@@ -16,7 +16,7 @@ A static site generator that fetches a BoardGameGeek (BGG) user's data and compi
 
 ## 🔧 Prerequisites
 
-* PHP 8.3 or later (CLI enabled)
+* PHP 8.4 or later (CLI enabled)
 * [Composer](https://getcomposer.org)
 
 ## 🚀 Installation & Setup
