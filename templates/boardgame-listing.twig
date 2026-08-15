@@ -1,14 +1,17 @@
-{% for sectionTitle, boardgameGroup in boardgameGroups %}
-    <section class="boardgame-listing-section" data-section-slug="{{ sectionTitle|lower|replace({' ': '-', '.': '-'}) }}">
-        <span class="boardgame-listing-section-title">
-                {{ sectionTitle|upper }}
-        </span>
-        <span class="boardgame-listing-section-link"> 🔗</span>
-
-        <div class="boardgame-listing">
+<div class="listing-groups listing-groups--{{ variant }}" data-listing-groups>
+    {% for sectionTitle, boardgameGroup in boardgameGroups %}
+        {% set sectionSlug = sectionTitle|lower|replace({' ': '-', '.': '-'}) %}
+        <section id="{{ sectionPrefix }}-{{ sectionSlug }}" class="boardgame-listing-section" data-section-slug="{{ sectionSlug }}" data-original-index="{{ loop.index0 }}">
+            <div class="listing-heading">
+                <h3>{{ sectionTitle|upper }}</h3>
+                <span class="listing-count">{{ boardgameGroup|length }} {{ boardgameGroup|length == 1 ? 'game' : 'games' }}</span>
+                <button class="section-link" type="button" data-copy-section-link aria-label="Copy link to {{ sectionTitle }}">#</button>
+            </div>
+            <div class="boardgame-listing boardgame-listing--{{ variant }}">
             {% for boardgame in boardgameGroup %}
-                {{ include('boardgame.twig', {'boardgame': boardgame}) }}
+                {{ include('boardgame.twig', {'boardgame': boardgame, 'variant': variant}) }}
             {% endfor %}
-        </div>
-    </section>
-{% endfor %}
+            </div>
+        </section>
+    {% endfor %}
+</div>

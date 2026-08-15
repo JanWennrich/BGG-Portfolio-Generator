@@ -5,61 +5,132 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>{{ bggUsername }}'s Boardgames 🎲</title>
+    <meta name="description" content="{{ bggUsername }}'s board game collection, recent plays, and wishlist."/>
+    <meta name="theme-color" content="#f6e7c8"/>
+    <title>{{ bggUsername }}'s Boardgames — Collection, Plays &amp; Wishlist</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&amp;family=JetBrains+Mono:wght@400;600;700&amp;family=Manrope:wght@400..800&amp;display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<h1>{{ bggUsername }}'s Boardgames 🎲</h1>
-<p>
-    <i>Extracted from <a href="https://boardgamegeek.com/user/{{ bggUsername }}" target="_blank">their BoardGameGeek profile</a>.</i>
-</p>
-<div class="tabs">
-    <div class="tab-switches">
-        <label class="tab-switch">
-            <input type="radio" name="tab-switch" aria-controls="tab-panel-history" checked="">
-            <span id="tab-switch-history" class="tab-switch-title" role="tab" >🗓️ Play History</span>
-        </label>
-        <label class="tab-switch">
-            <input type="radio" name="tab-switch" aria-controls="tab-panel-wishlist">
-            <span id="tab-switch-wishlist" class="tab-switch-title" role="tab">📋 Wishlist</span>
-        </label>
-        <label class="tab-switch">
-            <input type="radio" name="tab-switch" aria-controls="tab-panel-collection">
-            <span id="tab-switch-collection" class="tab-switch-title" role="tab">📚 Collection</span>
-        </label>
-    </div>
-    <div class="tab-panels">
-        <section id="tab-panel-history" class="tab-panel" aria-labelledby="tab-panel-history" data-tab-slug="history">
-            {{ include('boardgame-listing.twig', {'boardgameGroups': playsGroupedByDate}) }}
-        </section>
-        <section id="tab-panel-wishlist" class="tab-panel" aria-labelledby="tab-panel-wishlist" data-tab-slug="wishlist">
-            {{ include('boardgame-listing.twig', {'boardgameGroups': wishlistedBoardgamesGroupedByTextualWantLevel}) }}
-        </section>
-        <section id="tab-panel-collection" class="tab-panel" aria-labelledby="tab-panel-collection" data-tab-slug="collection">
-            {{ include('boardgame-listing.twig', {'boardgameGroups': ownedBoardgamesGroupedByFirstLetter}) }}
-        </section>
-    </div>
-</div>
-<hr>
-<footer>
-    <div class="github">
-        <a href="https://github.com/JanWennrich/BGG-Portfolio-Generator" target="_blank">
-            <div class="button" role="button">
-                <img src="images/github-logo.svg" alt="GitHub Logo"/>
-                <span>Generated with the BGG Portfolio Generator</span>
-            </div>
+<a class="skip-link" href="#collection">Skip to collection</a>
+
+<header class="site-header">
+    <div class="site-header__inner wrap">
+        <a class="brand" href="#top" aria-label="{{ bggUsername }}'s Boardgames — back to top">
+            <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true">
+                <rect x="7" y="7" width="34" height="34" rx="10" transform="rotate(-5 24 24)"/>
+                <circle cx="18" cy="19" r="2.5"/><circle cx="29" cy="29" r="2.5"/>
+                <circle cx="29" cy="18" r="2.5"/><circle cx="18" cy="30" r="2.5"/>
+            </svg>
+            <span>{{ bggUsername }}'s Boardgames</span>
         </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+            <span class="nav-toggle__label">Menu</span>
+            <span class="nav-toggle__icon" aria-hidden="true"></span>
+        </button>
+        <nav id="primary-navigation" class="primary-nav" aria-label="Sections">
+            <a href="#collection">Collection</a>
+            <a href="#plays">Play History</a>
+            <a href="#wishlist">Wishlist</a>
+            <button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch color scheme">
+                <span aria-hidden="true">◐</span>
+            </button>
+        </nav>
     </div>
-    <div class="bgg">
-        <a href="https://boardgamegeek.com/" target="_blank">
-            <div class="button" role="button">
-                <img src="images/powered_by_bgg-logo.webp" alt="Powered by BoardGameGeek Logo"/>
-                <span>Data provided by BoardGameGeek</span>
+</header>
+
+<main id="top">
+    <section class="hero wrap" aria-labelledby="page-title">
+        <p class="hero__kicker"><span aria-hidden="true">⌁</span> Roll for initiative</p>
+        <h1 id="page-title">The shelf, the table, and the <span>maybe-someday</span> pile.</h1>
+        <p class="hero__intro">Everything {{ bggUsername }} owns, has played lately, and keeps adding to the wishlist. Search it, browse it, or click through to BoardGameGeek.</p>
+        <dl class="stats" aria-label="Portfolio totals">
+            <div><dt>Games owned</dt><dd>{{ ownedBoardgamesCount }}</dd></div>
+            <div><dt>Plays logged</dt><dd>{{ playedBoardgamesCount }}</dd></div>
+            <div><dt>On the wishlist</dt><dd>{{ wishlistedBoardgamesCount }}</dd></div>
+        </dl>
+    </section>
+
+    <section id="collection" class="content-section wrap" data-portfolio-section>
+        <div class="section-heading">
+            <div>
+                <h2>Collection</h2>
+                <p>{{ ownedBoardgamesCount }} games on the shelf. Each card links to its BoardGameGeek page.</p>
             </div>
-        </a>
+            <div class="section-tools">
+                <label class="search-field">
+                    <span class="sr-only">Search collection by game name</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+                    <input type="search" placeholder="Search collection" data-search-target="collection"/>
+                </label>
+                <label class="select-field">
+                    <span class="sr-only">Sort collection</span>
+                    <select data-sort-target="collection"><option value="asc">A–Z</option><option value="desc">Z–A</option></select>
+                </label>
+            </div>
+        </div>
+        <nav class="letter-jump" aria-label="Jump to letter">
+            {% for sectionTitle in ownedBoardgamesGroupedByFirstLetter|keys %}
+                <a href="#collection-{{ sectionTitle|lower|replace({' ': '-', '.': '-'}) }}">{{ sectionTitle|upper }}</a>
+            {% endfor %}
+        </nav>
+        {{ include('boardgame-listing.twig', {'boardgameGroups': ownedBoardgamesGroupedByFirstLetter, 'variant': 'collection', 'sectionPrefix': 'collection'}) }}
+    </section>
+
+    <section id="plays" class="content-section content-section--tinted" data-portfolio-section>
+        <div class="wrap">
+            <div class="section-heading">
+                <div><h2>Play History</h2><p>Recent sessions, grouped by the day they hit the table.</p></div>
+                <div class="section-tools">
+                    <label class="search-field">
+                        <span class="sr-only">Search play history by game name</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+                        <input type="search" placeholder="Search play history" data-search-target="plays"/>
+                    </label>
+                    <div class="segmented-control" role="group" aria-label="Sort play history">
+                        <button type="button" data-history-sort="desc" aria-pressed="true">Newest</button>
+                        <button type="button" data-history-sort="asc" aria-pressed="false">Oldest</button>
+                    </div>
+                </div>
+            </div>
+            {{ include('boardgame-listing.twig', {'boardgameGroups': playsGroupedByDate, 'variant': 'plays', 'sectionPrefix': 'plays'}) }}
+        </div>
+    </section>
+
+    <section id="wishlist" class="content-section wrap" data-portfolio-section>
+        <div class="section-heading">
+            <div><h2>Wishlist</h2><p>{{ wishlistedBoardgamesCount }} games split by how urgently they should join the shelf.</p></div>
+            <div class="section-tools">
+                <label class="search-field">
+                    <span class="sr-only">Search wishlist by game name</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+                    <input type="search" placeholder="Search wishlist" data-search-target="wishlist"/>
+                </label>
+            </div>
+        </div>
+        <div class="wishlist-filters segmented-control" role="group" aria-label="Filter wishlist groups">
+            <button type="button" data-wishlist-filter="all" aria-pressed="true">All</button>
+            {% for sectionTitle in wishlistedBoardgamesGroupedByTextualWantLevel|keys %}
+                <button type="button" data-wishlist-filter="{{ sectionTitle|lower|replace({' ': '-', '.': '-'}) }}" aria-pressed="false">{{ sectionTitle }}</button>
+            {% endfor %}
+        </div>
+        {{ include('boardgame-listing.twig', {'boardgameGroups': wishlistedBoardgamesGroupedByTextualWantLevel, 'variant': 'wishlist', 'sectionPrefix': 'wishlist'}) }}
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="wrap">
+        <p class="site-footer__statement">From shelf to table—and back again.</p>
+        <div class="site-footer__meta">
+            <span>{{ bggUsername }}'s Boardgames</span>
+            <span>Data from <a href="https://boardgamegeek.com/" target="_blank" rel="noopener noreferrer">BoardGameGeek</a></span>
+            <a href="https://github.com/JanWennrich/BGG-Portfolio-Generator" target="_blank" rel="noopener noreferrer">Generator source ↗</a>
+        </div>
     </div>
 </footer>
-</body>
 <script src="script.js"></script>
+</body>
 </html>

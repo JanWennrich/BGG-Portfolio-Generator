@@ -1,18 +1,22 @@
-<article class="boardgame">
+<article class="boardgame boardgame--{{ variant }}" data-game-title="{{ boardgame.title|lower|e('html_attr') }}">
+    <a class="boardgame__link" href="{{ boardgame.getBggUrl() }}" target="_blank" rel="noopener noreferrer" aria-label="{{ boardgame.title }} on BoardGameGeek">
+        <div class="boardgame__media">
     {% if boardgame.thumbnailUrl %}
-        <a href="{{ boardgame.getBggUrl() }}" target="_blank">
             <img class="boardgame-image"
                  src="{{ boardgame.thumbnailUrl }}"
                  alt="{{ boardgame.title }}"
                  title="{{ boardgame.title }}"
                  loading="lazy"
             />
-        </a>
     {% else %}
         <div class="boardgame-image-placeholder">
-            <a href="{{ boardgame.getBggUrl() }}" target="_blank">
-                <span>{{ boardgame.title }}</span>
-            </a>
+            <span>{{ boardgame.title }}</span>
         </div>
     {% endif %}
+        </div>
+        <div class="boardgame__body">
+            <strong>{{ boardgame.title }}</strong>
+            {% if variant != 'plays' %}<span>BGG #{{ boardgame.bggId }}</span>{% endif %}
+        </div>
+    </a>
 </article>

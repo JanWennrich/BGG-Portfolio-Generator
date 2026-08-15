@@ -17,6 +17,10 @@ final readonly class HtmlGenerator implements HtmlGeneratorInterface
         WishlistEntryCollection $wishlistedBoardgames,
         string $bggUsername
     ): string {
+        $ownedBoardgamesCount = $boardgamesOwned->count();
+        $playedBoardgamesCount = $boardgamesPlayed->count();
+        $wishlistedBoardgamesCount = $wishlistedBoardgames->count();
+
         $ownedBoardgamesGroupedByFirstLetter = [];
 
         foreach ($boardgamesOwned as $ownedBoardgame) {
@@ -56,6 +60,9 @@ final readonly class HtmlGenerator implements HtmlGeneratorInterface
 
         $params = [
             'bggUsername' => $bggUsername,
+            'ownedBoardgamesCount' => $ownedBoardgamesCount,
+            'playedBoardgamesCount' => $playedBoardgamesCount,
+            'wishlistedBoardgamesCount' => $wishlistedBoardgamesCount,
             'playsGroupedByDate' => $playsGroupedByDate,
             'ownedBoardgamesGroupedByFirstLetter' => $ownedBoardgamesGroupedByFirstLetter,
             'wishlistedBoardgamesGroupedByTextualWantLevel' => $wishlistedBoardgamesGroupedByTextualWantLevel,

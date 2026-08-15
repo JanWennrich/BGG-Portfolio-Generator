@@ -6,12 +6,12 @@ A static site generator that fetches a BoardGameGeek (BGG) user's data and compi
 
 ## ✨ Features
 
-* Presents key information from your BGG profile, organized in interactive tabs:
+* Presents key information from your BGG profile in searchable, long-scroll sections:
     * **Play History** – grouped and sorted by date
     * **Wishlist** – grouped and sorted by priority
     * **Collection** – grouped and sorted alphabetically
 * Displays games as box cover thumbnails with direct links to their BGG pages
-* Supports deep linking to specific tabs and sections
+* Supports filtering, sorting, dark mode, and deep linking to specific sections
 * Fully static output: no backend required (vanilla JavaScript, HTML, and CSS)
 
 ## 🔧 Prerequisites
