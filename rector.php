@@ -22,7 +22,10 @@ return RectorConfig::configure()
         instanceOf: true,
         earlyReturn: true,
     )
-    ->withComposerBased(twig: true)
+    ->withComposerBased(
+        twig: true,
+        symfony: true
+    )
     ->withFluentCallNewLine()
     ->withPHPStanConfigs([__DIR__ . '/phpstan.dist.neon'])
     ->withSkip(
