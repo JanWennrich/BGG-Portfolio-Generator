@@ -11,7 +11,7 @@ return RectorConfig::configure()
         __DIR__ . '/src',
         __DIR__ . '/templates',
     ])
-    ->withPhpSets(php83: true) // upto PHP 8.3
+    ->withPhpSets(php84: true) // upto PHP 8.4
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,
